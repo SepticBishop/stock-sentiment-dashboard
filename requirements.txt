@@ -1,0 +1,12 @@
+streamlit
+pandas
+plotly
+nltk
+transformers
+requests
+pytz
+pyngrok
+gdown
+yfinance
+tensorflow
+joblib
