@@ -125,7 +125,7 @@ class API:
         resp = requests.get(
             "https://mboum-finance.p.rapidapi.com/v1/markets/stock/history",
             headers={
-                "X-RapidAPI-Key":  "…your key…",
+                "X-RapidAPI-Key":  "48c56bcad6msh9897ec585559d19p16c410jsn01e1017db67b",
                 "X-RapidAPI-Host": "mboum-finance.p.rapidapi.com"
             },
             params={"symbol":ticker,"interval":"5m","diffandsplits":"false"}
