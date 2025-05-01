@@ -151,7 +151,7 @@ class API:
 
 class FinbertSentiment:
     def __init__(self):
-        self.pipe = pipeline("sentiment-analysis", model="ProsusAI/finbert",framework="tf")
+        self.pipe = pipeline("sentiment-analysis", model="ProsusAI/finbert",framework="pt")
         self.df   = pd.DataFrame()
     def set_data(self, df: pd.DataFrame):
         self.df = df.copy()
