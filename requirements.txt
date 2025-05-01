@@ -13,3 +13,4 @@ tensorflow
 joblib
 scikit-learn
 imbalanced-learn
+tf-keras
