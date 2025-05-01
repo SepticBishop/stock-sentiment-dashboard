@@ -1,4 +1,5 @@
 streamlit
+torch
 pandas
 plotly
 nltk
@@ -12,4 +13,3 @@ tensorflow
 joblib
 scikit-learn
 imbalanced-learn
-torch
