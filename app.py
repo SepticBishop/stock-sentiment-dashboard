@@ -1,5 +1,4 @@
 
-%%writefile app.py
 
 import os
 os.environ["STREAMLIT_WATCHDOG_DISABLE"] = "true"
