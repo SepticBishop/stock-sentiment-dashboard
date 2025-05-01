@@ -10,3 +10,5 @@ gdown
 yfinance
 tensorflow
 joblib
+scikit-learn
+imbalanced-learn
