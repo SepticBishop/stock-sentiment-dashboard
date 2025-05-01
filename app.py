@@ -125,7 +125,7 @@ class API:
         resp = requests.get(
             "https://mboum-finance.p.rapidapi.com/v1/markets/stock/history",
             headers={
-                "X-RapidAPI-Key":  "b106728d16msh9130dff4689412bp14f388jsn1e213c716bb4",
+                "X-RapidAPI-Key":  "…your key…",
                 "X-RapidAPI-Host": "mboum-finance.p.rapidapi.com"
             },
             params={"symbol":ticker,"interval":"5m","diffandsplits":"false"}
@@ -140,22 +140,22 @@ class API:
         if df.empty:
             # fallback to last 7d via yfinance
             yf_df = yf.download(ticker, period="7d", interval="5m", auto_adjust=False)[["Open","Volume"]]
-            #yf_df = yf_df.reset_index().rename(columns={"Datetime":"Date Time", "Open":"Price", "Volume":"Volume"})
-            #yf_df["Date Time"] = pd.to_datetime(yf_df["Date Time"], utc=True).dt.tz_convert(EST)
-            #yf_df["Price"]     = yf_df["Price"].astype(float)
-            #df = yf_df
+            # reset whatever index name it gave you into a real column
             yf_df = yf_df.reset_index()
+            # grab that new first column name and remap it to "Date Time"
             date_col = yf_df.columns[0]
-            yf_df = yf_df.rename(columns={date_col: "Date Time", "Open":      "Price"})
+            yf_df = yf_df.rename(columns={ date_col: "Date Time", "Open": "Price" })
 
+            # now consistently tz‐convert and typecast
             yf_df["Date Time"] = pd.to_datetime(yf_df["Date Time"], utc=True).dt.tz_convert(EST)
             yf_df["Price"]     = yf_df["Price"].astype(float)
             df = yf_df
-        
         else:
             df.sort_values("Date Time", inplace=True)
             df.reset_index(drop=True, inplace=True)
+
         return df
+
 
 class FinbertSentiment:
     def __init__(self):
