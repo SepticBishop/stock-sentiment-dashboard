@@ -139,17 +139,17 @@ class API:
 
         if df.empty:
             # fallback to last 7d via yfinance
+            try:
             yf_df = yf.download(ticker, period="7d", interval="5m", auto_adjust=False)[["Open","Volume"]]
-            # reset whatever index name it gave you into a real column
             yf_df = yf_df.reset_index()
-            # grab that new first column name and remap it to "Date Time"
             date_col = yf_df.columns[0]
             yf_df = yf_df.rename(columns={ date_col: "Date Time", "Open": "Price" })
-
-            # now consistently tz‐convert and typecast
             yf_df["Date Time"] = pd.to_datetime(yf_df["Date Time"], utc=True).dt.tz_convert(EST)
             yf_df["Price"]     = yf_df["Price"].astype(float)
             df = yf_df
+            except Exception:
+            # if yfinance fails (rate-limit, network, etc.), return an empty DataFrame
+            return pd.DataFrame(columns=["Date Time","Price","Volume"])
         else:
             df.sort_values("Date Time", inplace=True)
             df.reset_index(drop=True, inplace=True)
