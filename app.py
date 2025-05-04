@@ -1,4 +1,4 @@
-!pip install streamlit pandas plotly nltk transformers requests pytz pyngrok gdown finnhub-python tensorflow yfinance
+pip install streamlit pandas plotly nltk transformers requests pytz pyngrok gdown finnhub-python tensorflow yfinance
 
 
 import os
